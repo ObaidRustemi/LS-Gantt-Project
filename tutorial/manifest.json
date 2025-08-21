@@ -16,10 +16,10 @@
       "iconUrl": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/icon.png",
       "description": "A simple table chart.",
       "resource": {
-        "js": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/viz-codelab.js",
-        "config": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/viz-codelab.json",
-        "css": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/viz-codelab.css"
-      }
+        "type": "HTML",
+        "url": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/index.html"
+      },
+      "config": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/viz-codelab.json"
     }
   ]
 }
