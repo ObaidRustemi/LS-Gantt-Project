@@ -1,0 +1,21 @@
+{
+  "name": "Tutorial Table Visualization",
+  "organization": "Tutorial Org",
+  "description": "A simple table visualization following Google's codelab tutorial",
+  "logoUrl": "https://ObaidRustemi.github.io/LS-Gantt-Project/tutorial/logo.png",
+  "supportUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
+  "privacyPolicyUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project/blob/main/README.md",
+  "components": [
+    {
+      "id": "tutorial_table",
+      "name": "Tutorial Table",
+      "description": "A simple table visualization from the Google codelab",
+      "iconUrl": "https://ObaidRustemi.github.io/LS-Gantt-Project/tutorial/icon.png",
+      "resource": {
+        "type": "HTML",
+        "url": "https://ObaidRustemi.github.io/LS-Gantt-Project/tutorial/index.html"
+      },
+      "config": "https://ObaidRustemi.github.io/LS-Gantt-Project/tutorial/viz-codelab.json"
+    }
+  ]
+}
