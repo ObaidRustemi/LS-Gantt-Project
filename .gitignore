@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+Icon?
+._*
+
+# Google Cloud SDK / gsutil
+gsutil/
+gcloud/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Cache
+.cache/
+*.cache
