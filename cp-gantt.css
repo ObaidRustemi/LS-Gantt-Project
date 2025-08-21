@@ -1,0 +1,55 @@
+/* CP Gantt Visualization Styles */
+#container {
+  width: 100%;
+  height: 100%;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #F8FAFC;
+}
+
+/* SVG styling */
+svg {
+  display: block;
+  border-radius: 8px;
+}
+
+/* Timeline segment styles */
+.cp-segment {
+  transition: opacity 0.2s ease;
+}
+
+.cp-segment:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+/* CP Phase colors */
+.cp3 { fill: #2563EB; }
+.cp3-5 { fill: #EA580C; }
+.cp4 { fill: #059669; }
+.cp5 { fill: #DC2626; }
+
+/* Text styles */
+.project-label {
+  font-size: 14px;
+  font-weight: 500;
+  fill: #1F2937;
+}
+
+.team-label {
+  font-size: 12px;
+  font-weight: 600;
+  fill: #6B7280;
+  text-transform: uppercase;
+}
+
+.timeline-text {
+  font-size: 11px;
+  font-weight: 600;
+  fill: white;
+}
+
+/* Debug styles */
+.debug-text {
+  font-size: 14px;
+  fill: #6B7280;
+}

@@ -1,17 +1,25 @@
 {
   "name": "Community Visualization",
-  "organization": "Looker Studio Codelab", 
+  "logoUrl": "https://raw.githubusercontent.com/googledatastudio/community-visualizations/master/docs/codelab/img/logo.png",
+  "organization": "Looker Studio Codelab",
+  "organizationUrl": "https://url",
+  "termsOfServiceUrl": "https://url",
+  "supportUrl": "https://url",
+  "packageUrl": "https://url",
+  "privacyPolicyUrl": "https://url",
   "description": "Community Visualization Codelab",
+  "devMode": true,
   "components": [
     {
       "id": "tableChart",
       "name": "Table",
+      "iconUrl": "https://raw.githubusercontent.com/googledatastudio/community-visualizations/master/docs/codelab/img/logo.png",
       "description": "A simple table chart.",
       "resource": {
-        "type": "HTML",
-        "url": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/index.html"
-      },
-      "config": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/viz-codelab.json"
+        "js": "gs://obie-cp-tutorial/viz-codelab.js",
+        "config": "gs://obie-cp-tutorial/viz-codelab.json",
+        "css": "gs://obie-cp-tutorial/viz-codelab.css"
+      }
     }
   ]
 }
