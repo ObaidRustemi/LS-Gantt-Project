@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>CP Gantt Chart</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+            background: #ffffff;
+            overflow: hidden;
+        }
+        
+        /* Main container */
+        #cp-gantt-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        /* Loading state */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 14px;
+            color: #5f6368;
+        }
+        
+        /* Error state */
+        .error {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 14px;
+            color: #d93025;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        /* Visualization will be rendered here */
+        #gantt-svg {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container for our Gantt chart -->
+    <div id="cp-gantt-container">
+        <div class="loading" id="loading-state">
+            Loading CP Gantt Chart...
+        </div>
+    </div>
+
+    <!-- Looker Studio Community Components SDK -->
+    <script src="https://unpkg.com/@google/dscc@latest/build/js/dscc.js"></script>
+    
+    <!-- Our visualization logic -->
+    <script src="index.js"></script>
+</body>
+</html>

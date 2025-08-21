@@ -1,0 +1,20 @@
+{
+  "name": "CP Gantt Chart",
+  "organization": "Your Organization", 
+  "description": "A simple Gantt chart for CP phases",
+  "logoUrl": "https://via.placeholder.com/64x64.png?text=CP",
+  "supportUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
+  "privacyPolicyUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
+  "components": [
+    {
+      "id": "cp_gantt",
+      "name": "CP Gantt",
+      "description": "Simple CP phases timeline",
+      "iconUrl": "https://via.placeholder.com/64x64.png?text=CP",
+      "resource": {
+        "type": "HTML",
+        "url": "index.html"
+      }
+    }
+  ]
+}
