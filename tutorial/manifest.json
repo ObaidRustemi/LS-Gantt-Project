@@ -1,19 +1,11 @@
 {
   "name": "Community Visualization",
-  "logoUrl": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/logo.png",
-  "organization": "Looker Studio Codelab",
-  "organizationUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
-  "termsOfServiceUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
-  "supportUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
-  "packageUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
-  "privacyPolicyUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
+  "organization": "Looker Studio Codelab", 
   "description": "Community Visualization Codelab",
-  "devMode": true,
   "components": [
     {
       "id": "tableChart",
       "name": "Table",
-      "iconUrl": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/icon.png",
       "description": "A simple table chart.",
       "resource": {
         "type": "HTML",
