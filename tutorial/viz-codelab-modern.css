@@ -1,0 +1,268 @@
+/* Modern CP Gantt Visualization Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Design System Variables */
+:root {
+  /* CP Phase Colors */
+  --cp3-primary: #3B82F6;
+  --cp3-secondary: #1D4ED8;
+  --cp3-5-primary: #8B5CF6;
+  --cp3-5-secondary: #7C3AED;
+  --cp4-primary: #10B981;
+  --cp4-secondary: #059669;
+  --cp5-primary: #F59E0B;
+  --cp5-secondary: #D97706;
+  
+  /* Surface Colors */
+  --surface-primary: #FFFFFF;
+  --surface-secondary: #F8FAFC;
+  --surface-tertiary: #E2E8F0;
+  --surface-accent: #F1F5F9;
+  
+  /* Text Colors */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  
+  /* Spacing Scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-hover: 0 8px 25px -8px rgb(0 0 0 / 0.15);
+}
+
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text-primary);
+  background: var(--surface-secondary);
+}
+
+/* Main Container */
+.cp-gantt-container {
+  padding: var(--space-6);
+  background: linear-gradient(135deg, var(--surface-secondary) 0%, var(--surface-tertiary) 100%);
+  min-height: 100vh;
+}
+
+/* Team Section */
+.team-section {
+  margin-bottom: var(--space-8);
+}
+
+.team-header {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  background: var(--surface-accent);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--cp3-primary);
+}
+
+/* Project Timeline */
+.project-timeline {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-3);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--surface-tertiary);
+}
+
+.project-timeline:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--cp3-primary);
+}
+
+.project-title {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+/* CP Phase Timeline Bar */
+.cp-timeline-bar {
+  display: flex;
+  height: 32px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.cp-phase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 500;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cp-phase::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cp-phase:hover::before {
+  opacity: 1;
+}
+
+.cp-phase-3 {
+  background: linear-gradient(135deg, var(--cp3-primary), var(--cp3-secondary));
+}
+
+.cp-phase-3-5 {
+  background: linear-gradient(135deg, var(--cp3-5-primary), var(--cp3-5-secondary));
+}
+
+.cp-phase-4 {
+  background: linear-gradient(135deg, var(--cp4-primary), var(--cp4-secondary));
+}
+
+.cp-phase-5 {
+  background: linear-gradient(135deg, var(--cp5-primary), var(--cp5-secondary));
+}
+
+/* Tooltip Styles */
+.cp-tooltip {
+  position: absolute;
+  background: var(--surface-primary);
+  border: 1px solid var(--surface-tertiary);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: var(--shadow-lg);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  min-width: 200px;
+}
+
+.cp-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.tooltip-icon {
+  width: 16px;
+  height: 16px;
+  background: var(--cp3-primary);
+  border-radius: var(--radius-sm);
+}
+
+.tooltip-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.tooltip-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Loading State */
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--surface-tertiary) 25%, var(--surface-accent) 50%, var(--surface-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+  height: 32px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cp-gantt-container {
+    padding: var(--space-4);
+  }
+  
+  .project-timeline {
+    padding: var(--space-3);
+  }
+  
+  .cp-timeline-bar {
+    height: 28px;
+  }
+  
+  .cp-phase {
+    font-size: 0.625rem;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .cp-timeline-bar {
+    box-shadow: 0 0.5px 1px 0 rgb(0 0 0 / 0.1);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus States for Accessibility */
+.project-timeline:focus-visible {
+  outline: 2px solid var(--cp3-primary);
+  outline-offset: 2px;
+}
+
+.cp-phase:focus-visible {
+  outline: 2px solid white;
+  outline-offset: -2px;
+}

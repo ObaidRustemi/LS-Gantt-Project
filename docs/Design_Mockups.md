@@ -270,4 +270,5 @@ Mobile (<768px):    Stacked layout, project list + selected timeline
 
 ---
 
+
 *This design wave establishes our visual foundation. Ready for team review and coding implementation!*
