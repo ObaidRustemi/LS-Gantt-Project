@@ -5,7 +5,7 @@
 
 set -e  # Exit on any error
 
-BUCKET="obie-cp-gantt"
+BUCKET="obie-ls-cp-gantt-plugin"
 SOURCE_DIR="."
 FILES=("cp-gantt.css" "cp-gantt.js" "cp-gantt-config.json" "manifest.json" "index.html")
 
