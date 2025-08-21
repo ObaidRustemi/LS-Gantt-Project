@@ -1,21 +1,25 @@
 {
-  "name": "Tutorial Table Visualization",
-  "organization": "Tutorial Org",
-  "description": "A simple table visualization following Google's codelab tutorial",
-  "logoUrl": "https://ObaidRustemi.github.io/LS-Gantt-Project/tutorial/logo.png",
+  "name": "Community Visualization",
+  "logoUrl": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/logo.png",
+  "organization": "Looker Studio Codelab",
+  "organizationUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
+  "termsOfServiceUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
   "supportUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
-  "privacyPolicyUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project/blob/main/README.md",
+  "packageUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
+  "privacyPolicyUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
+  "description": "Community Visualization Codelab",
+  "devMode": true,
   "components": [
     {
-      "id": "tutorial_table",
-      "name": "Tutorial Table",
-      "description": "A simple table visualization from the Google codelab",
-      "iconUrl": "https://ObaidRustemi.github.io/LS-Gantt-Project/tutorial/icon.png",
+      "id": "tableChart",
+      "name": "Table",
+      "iconUrl": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/icon.png",
+      "description": "A simple table chart.",
       "resource": {
-        "type": "HTML",
-        "url": "https://ObaidRustemi.github.io/LS-Gantt-Project/tutorial/index.html"
-      },
-      "config": "https://ObaidRustemi.github.io/LS-Gantt-Project/tutorial/viz-codelab.json"
+        "js": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/viz-codelab.js",
+        "config": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/viz-codelab.json",
+        "css": "https://obaidrustemi.github.io/LS-Gantt-Project/tutorial/viz-codelab.css"
+      }
     }
   ]
 }
