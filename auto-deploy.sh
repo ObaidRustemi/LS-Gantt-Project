@@ -5,9 +5,9 @@
 
 set -e  # Exit on any error
 
-BUCKET="obie-cp-tutorial"
-TUTORIAL_DIR="tutorial"
-FILES=("viz-codelab.css" "viz-codelab.js" "viz-codelab.json" "manifest.json")
+BUCKET="obie-cp-gantt"
+SOURCE_DIR="."
+FILES=("cp-gantt.css" "cp-gantt.js" "cp-gantt-config.json" "manifest.json" "index.html")
 
 echo "🚀 CP Gantt Auto Deploy"
 echo "======================"
@@ -17,7 +17,7 @@ echo ""
 # Function to upload a single file
 upload_file() {
     local file=$1
-    local local_path="$TUTORIAL_DIR/$file"
+    local local_path="$SOURCE_DIR/$file"
     local gs_path="gs://$BUCKET/$file"
     
     if [[ ! -f "$local_path" ]]; then

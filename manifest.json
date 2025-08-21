@@ -1,15 +1,15 @@
 {
-  "name": "CP Gantt Chart",
-  "organization": "Your Organization", 
-  "description": "A simple Gantt chart for CP phases",
+  "name": "CP Gantt Visualization",
+  "organization": "CP Gantt Project", 
+  "description": "Executive-ready CP phase timeline visualization with interactive hover states and dark mode support",
   "logoUrl": "https://via.placeholder.com/64x64.png?text=CP",
   "supportUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
   "privacyPolicyUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
   "components": [
     {
       "id": "cp_gantt",
-      "name": "CP Gantt",
-      "description": "Simple CP phases timeline",
+      "name": "CP Gantt Chart",
+      "description": "Interactive timeline visualization showing CP3, CP3.5, CP4, and CP5 phases with hover tooltips and team grouping",
       "iconUrl": "https://via.placeholder.com/64x64.png?text=CP",
       "resource": {
         "type": "HTML",

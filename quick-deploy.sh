@@ -3,8 +3,8 @@
 # CP Gantt Quick Deploy
 # Simple helper for rapid deployment to GCS
 
-BUCKET="obie-cp-tutorial"
-CONSOLE_URL="https://console.cloud.google.com/storage/browser/obie-cp-tutorial"
+BUCKET="obie-cp-gantt"
+CONSOLE_URL="https://console.cloud.google.com/storage/browser/obie-cp-gantt"
 
 echo "🚀 CP Gantt Quick Deploy"
 echo "======================="
@@ -14,8 +14,8 @@ echo ""
 echo "📋 FILES TO DEPLOY:"
 echo ""
 
-cd tutorial
-for file in viz-codelab.css viz-codelab.js viz-codelab.json manifest.json; do
+# Check current directory files
+for file in cp-gantt.css cp-gantt.js cp-gantt-config.json manifest.json index.html; do
     if [[ -f "$file" ]]; then
         # Get file modification time
         if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -46,7 +46,7 @@ echo ""
 echo "2️⃣  In the console:"
 echo "   👉 For each file above:"
 echo "   👉   • Delete the old version"
-echo "   👉   • Upload the new version from tutorial/ folder"
+echo "   👉   • Upload the new version from project root folder"
 echo ""
 echo "3️⃣  Test deployment:"
 echo "   👉 Refresh your Looker Studio visualization"
@@ -59,5 +59,3 @@ echo ""
 echo "📁 Upload files from: $(pwd)"
 echo ""
 echo "💡 TIP: Drag files directly from Finder to GCS Console!"
-
-cd ..
