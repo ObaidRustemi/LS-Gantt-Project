@@ -3,8 +3,8 @@
 # CP Gantt Quick Deploy
 # Simple helper for rapid deployment to GCS
 
-BUCKET="obie-cp-tutorial"
-CONSOLE_URL="https://console.cloud.google.com/storage/browser/obie-cp-tutorial"
+BUCKET="obie-cp-gantt"
+CONSOLE_URL="https://console.cloud.google.com/storage/browser/obie-cp-gantt"
 
 echo "🚀 CP Gantt Quick Deploy"
 echo "======================="
