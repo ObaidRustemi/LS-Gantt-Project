@@ -40,6 +40,7 @@
 - **Local Tests**: `test-runner.html` runs 12 comprehensive unit tests
 - **Functions**: Isolated in `cp-gantt-functions.js` for testing
 - **Test Coverage**: Date parsing, formatting, data processing, timeline calculations
+- **Auto-Testing Policy**: Feel free to automatically add tests for new features/functions when it makes engineering sense - no need to ask permission
 
 ## 📁 **File Structure**
 ```
