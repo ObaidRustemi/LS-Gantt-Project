@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP Gantt Test Runner</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+            color: #F9FAFB;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #3B82F6;
+            margin: 0;
+        }
+        
+        .console-output {
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow-y: auto;
+            max-height: 70vh;
+        }
+        
+        .run-button {
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .run-button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧪 CP Gantt Test Runner</h1>
+        <p>Simple JavaScript testing for data processing logic</p>
+    </div>
+    
+    <button class="run-button" onclick="runTests()">🚀 Run Tests</button>
+    
+    <div id="console" class="console-output">
+        Click "Run Tests" to execute the test suite...
+    </div>
+
+    <script>
+        // Override console.log to capture output
+        const originalLog = console.log;
+        const originalError = console.error;
+        const consoleOutput = document.getElementById('console');
+        
+        function captureLog(...args) {
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            
+            consoleOutput.textContent += message + '\n';
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            
+            // Also log to real console
+            originalLog(...args);
+        }
+        
+        function captureError(...args) {
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            
+            consoleOutput.textContent += message + '\n';
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            
+            // Also log to real console
+            originalError(...args);
+        }
+        
+        console.log = captureLog;
+        console.error = captureError;
+        
+        function runTests() {
+            consoleOutput.textContent = '';
+            console.log('🧪 Starting CP Gantt Test Suite...\n');
+            
+            // Load and run the tests
+            try {
+                // The test script will run automatically when loaded
+                const script = document.createElement('script');
+                script.src = 'test-cp-gantt.js';
+                script.onload = () => {
+                    console.log('\n✅ Test execution complete!');
+                };
+                script.onerror = () => {
+                    console.error('❌ Failed to load test script');
+                };
+                document.head.appendChild(script);
+            } catch (error) {
+                console.error('💥 Test runner error:', error.message);
+            }
+        }
+    </script>
+    
+    <!-- Load our CP Gantt functions for testing -->
+    <script src="cp-gantt-functions.js"></script>
+</body>
+</html>

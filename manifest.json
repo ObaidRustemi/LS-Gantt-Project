@@ -12,9 +12,9 @@
       "description": "Interactive timeline visualization showing CP3, CP3.5, CP4, and CP5 phases with hover tooltips and team grouping",
       "iconUrl": "https://storage.googleapis.com/obie-ls-cp-gantt-plugin/CPG-Logo.PNG",
       "resource": {
-        "js": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v3.js",
-        "config": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v3.json",
-        "css": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v3.css"
+        "js": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v5-20250821.js",
+        "config": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v5-20250821.json",
+        "css": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v5-20250821.css"
       }
     }
   ]
