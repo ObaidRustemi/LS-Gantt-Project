@@ -1,20 +1,24 @@
 {
   "name": "CP Gantt Visualization",
-  "organization": "Obie Rustemi", 
-  "description": "Executive-ready CP phase timeline visualization with interactive hover states and dark mode support",
   "logoUrl": "https://storage.googleapis.com/obie-ls-cp-gantt-plugin/CPG-Logo.PNG",
+  "organization": "Obie Rustemi",
+  "organizationUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
+  "termsOfServiceUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
   "supportUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
+  "packageUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
   "privacyPolicyUrl": "https://github.com/ObaidRustemi/LS-Gantt-Project",
+  "description": "Executive-ready CP phase timeline visualization",
+  "devMode": true,
   "components": [
     {
       "id": "cp_gantt",
       "name": "CP Gantt Chart",
-      "description": "Interactive timeline visualization showing CP3, CP3.5, CP4, and CP5 phases with hover tooltips and team grouping",
       "iconUrl": "https://storage.googleapis.com/obie-ls-cp-gantt-plugin/CPG-Logo.PNG",
+      "description": "Interactive timeline visualization showing CP phases",
       "resource": {
-        "js": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v5-20250821.js",
-        "config": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v5-20250821.json",
-        "css": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v5-20250821.css"
+        "js": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v15-counter.js",
+        "config": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v15-counter.json",
+        "css": "gs://obie-ls-cp-gantt-plugin/cp-gantt-tim-v15-counter.css"
       }
     }
   ]

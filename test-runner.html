@@ -6,124 +6,136 @@
     <title>CP Gantt Test Runner</title>
     <style>
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
-            color: #F9FAFB;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #ffffff;
             min-height: 100vh;
         }
         
-        .header {
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1 {
             text-align: center;
             margin-bottom: 30px;
+            color: #4CAF50;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
         }
         
-        .header h1 {
-            color: #3B82F6;
-            margin: 0;
-        }
-        
-        .console-output {
-            background: #111827;
-            border: 1px solid #374151;
+        #test-output {
+            background: #000;
+            border: 1px solid #333;
             border-radius: 8px;
             padding: 20px;
-            font-family: 'Monaco', 'Menlo', monospace;
+            font-family: 'Courier New', monospace;
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
+            overflow-x: auto;
             white-space: pre-wrap;
+            max-height: 500px;
             overflow-y: auto;
-            max-height: 70vh;
         }
         
         .run-button {
-            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
             color: white;
             border: none;
-            padding: 12px 24px;
             border-radius: 6px;
             font-size: 16px;
-            font-weight: 600;
             cursor: pointer;
-            margin: 20px auto;
-            display: block;
+            transition: transform 0.2s;
         }
         
         .run-button:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+        }
+        
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .status.passed {
+            color: #4CAF50;
+        }
+        
+        .status.failed {
+            color: #f44336;
         }
     </style>
 </head>
 <body>
-    <div class="header">
+    <div class="container">
         <h1>🧪 CP Gantt Test Runner</h1>
-        <p>Simple JavaScript testing for data processing logic</p>
-    </div>
-    
-    <button class="run-button" onclick="runTests()">🚀 Run Tests</button>
-    
-    <div id="console" class="console-output">
-        Click "Run Tests" to execute the test suite...
+        
+        <button class="run-button" onclick="runTestsAndDisplay()">Run Tests</button>
+        
+        <div id="test-output">Click "Run Tests" to execute the test suite...</div>
+        
+        <div id="status" class="status"></div>
     </div>
 
+    <script src="cp-gantt-functions.js"></script>
+    <script src="test-cp-gantt.js"></script>
+    
     <script>
-        // Override console.log to capture output
-        const originalLog = console.log;
-        const originalError = console.error;
-        const consoleOutput = document.getElementById('console');
-        
-        function captureLog(...args) {
-            const message = args.map(arg => 
-                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
-            ).join(' ');
+        function runTestsAndDisplay() {
+            const output = document.getElementById('test-output');
+            const status = document.getElementById('status');
             
-            consoleOutput.textContent += message + '\n';
-            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            // Clear previous output
+            output.textContent = '';
+            status.textContent = '';
             
-            // Also log to real console
-            originalLog(...args);
-        }
-        
-        function captureError(...args) {
-            const message = args.map(arg => 
-                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
-            ).join(' ');
+            // Capture console output
+            const originalLog = console.log;
+            let logs = [];
             
-            consoleOutput.textContent += message + '\n';
-            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            console.log = function(...args) {
+                logs.push(args.join(' '));
+                originalLog.apply(console, args);
+            };
             
-            // Also log to real console
-            originalError(...args);
-        }
-        
-        console.log = captureLog;
-        console.error = captureError;
-        
-        function runTests() {
-            consoleOutput.textContent = '';
-            console.log('🧪 Starting CP Gantt Test Suite...\n');
-            
-            // Load and run the tests
             try {
-                // The test script will run automatically when loaded
-                const script = document.createElement('script');
-                script.src = 'test-cp-gantt.js';
-                script.onload = () => {
-                    console.log('\n✅ Test execution complete!');
-                };
-                script.onerror = () => {
-                    console.error('❌ Failed to load test script');
-                };
-                document.head.appendChild(script);
+                const results = runTests();
+                
+                // Restore console.log
+                console.log = originalLog;
+                
+                // Display results
+                output.textContent = logs.join('\n');
+                
+                if (results.failed === 0) {
+                    status.textContent = `🎉 All ${results.passed} tests passed!`;
+                    status.className = 'status passed';
+                } else {
+                    status.textContent = `⚠️ ${results.failed} test(s) failed (${results.passed} passed)`;
+                    status.className = 'status failed';
+                }
+                
             } catch (error) {
-                console.error('💥 Test runner error:', error.message);
+                console.log = originalLog;
+                output.textContent = `Error running tests: ${error.message}`;
+                status.textContent = '❌ Test execution failed';
+                status.className = 'status failed';
             }
         }
     </script>
-    
-    <!-- Load our CP Gantt functions for testing -->
-    <script src="cp-gantt-functions.js"></script>
 </body>
 </html>

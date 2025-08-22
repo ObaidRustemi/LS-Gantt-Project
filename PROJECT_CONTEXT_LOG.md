@@ -32,6 +32,7 @@
 
 ### **Common Gotchas**
 - **Commit Hangs**: Use short ASCII messages (<50 chars), no emojis/rich text
+- **Long Commit Messages**: Multiline/detailed commit messages cause git to hang - keep it simple!
 - **gsutil Staging**: Add `gsutil/` to `.gitignore` to prevent accidental commits
 - **Line Breaks**: Keep manifest JSON compact to avoid parsing issues
 
@@ -71,6 +72,13 @@ cp-gantt-functions.js       # Isolated functions for testing
 - **Broken Deployment**: Revert manifest to last working version immediately
 - **Cache Issues**: Delete and re-upload with proper headers
 
+## 👥 **Original Dream Team** 
+- **🔧 Alex (Engineering)**: Technical architect who built the DSCC infrastructure and deployment pipeline
+- **🎨 Maya (Design)**: Design genius behind the beautiful mockups, dark mode specs, and UX flow
+- **📊 Sam (Data Science)**: Data wizard who planned Google Sheets integration and field mapping strategy
+- **🤝 Current Team**: Sophia (Senior Staff Engineer) continuing their collaborative legacy
+
 ---
-*Last Updated: $(date)*
-*Current Status: Manifest fixed with gs:// URLs, ready to test visualization connection*
+*Last Updated: $(date)*  
+*Current Status: Manifest fixed with gs:// URLs, ready to test visualization connection*  
+*Legacy: Built on the incredible foundation laid by Alex, Maya, and Sam*

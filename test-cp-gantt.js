@@ -1,247 +1,137 @@
-// CP Gantt Test Suite - Simple JavaScript Testing
-// Run in browser console or test runner HTML
+// CP Gantt Test Suite
+// 12 comprehensive tests for data processing and rendering logic
 
-console.log('🧪 CP Gantt Test Suite Starting...\n');
-
-// Test Counter
-let testCount = 0;
-let passedTests = 0;
-
-function runTest(testName, testFunction) {
-  testCount++;
-  try {
-    const result = testFunction();
-    if (result) {
-      passedTests++;
-      console.log(`✅ Test ${testCount}: ${testName} - PASSED`);
+function runTests() {
+    console.log('🧪 Running CP Gantt Test Suite...\n');
+    
+    let passed = 0;
+    let failed = 0;
+    
+    function test(name, testFunction) {
+        try {
+            const result = testFunction();
+            if (result) {
+                console.log(`✅ ${name}`);
+                passed++;
+            } else {
+                console.log(`❌ ${name}`);
+                failed++;
+            }
+        } catch (error) {
+            console.log(`❌ ${name} - Error: ${error.message}`);
+            failed++;
+        }
+    }
+    
+    // Test 1: Date parsing - valid DD/MMM/YY format
+    test('Date parsing - valid DD/MMM/YY format', () => {
+        const result = parseDate('15/Jan/24');
+        return result instanceof Date && result.getFullYear() === 2024 && result.getMonth() === 0 && result.getDate() === 15;
+    });
+    
+    // Test 2: Date parsing - invalid format
+    test('Date parsing - invalid format', () => {
+        const result = parseDate('invalid-date');
+        return result === null;
+    });
+    
+    // Test 3: Date parsing - empty input
+    test('Date parsing - empty input', () => {
+        const result = parseDate('');
+        return result === null;
+    });
+    
+    // Test 4: Date formatting - valid date
+    test('Date formatting - valid date', () => {
+        const date = new Date(2024, 0, 15); // January 15, 2024
+        const result = formatDateForDisplay(date);
+        return result === '01/15/24';
+    });
+    
+    // Test 5: Date formatting - invalid date
+    test('Date formatting - invalid date', () => {
+        const result = formatDateForDisplay(null);
+        return result === '';
+    });
+    
+    // Test 6: Data processing - valid data
+    test('Data processing - valid data', () => {
+        const mockData = {
+            tables: {
+                DEFAULT: [
+                    { team: 'Alpha', summary: 'Project A', cp3_date: '15/Jan/24', cp4_date: '15/Feb/24' },
+                    { team: 'Beta', summary: 'Project B', cp3_date: '20/Jan/24', cp4_date: '20/Feb/24' }
+                ]
+            }
+        };
+        const result = processProjectData(mockData);
+        return Array.isArray(result) && result.length === 2 && result[0].team === 'Alpha';
+    });
+    
+    // Test 7: Data processing - empty data
+    test('Data processing - empty data', () => {
+        const result = processProjectData({});
+        return Array.isArray(result) && result.length === 0;
+    });
+    
+    // Test 8: Timeline layout - with projects
+    test('Timeline layout - with projects', () => {
+        const projects = [
+            { cp3_date: new Date(2024, 0, 15), cp4_date: new Date(2024, 1, 15) }
+        ];
+        const result = calculateTimelineLayout(projects);
+        return result.dateRange !== null && result.timelineWidth === 800;
+    });
+    
+    // Test 9: Timeline layout - empty projects
+    test('Timeline layout - empty projects', () => {
+        const result = calculateTimelineLayout([]);
+        return result.dateRange === null && result.timelineWidth === 800;
+    });
+    
+    // Test 10: Date parsing - different month abbreviations
+    test('Date parsing - different month abbreviations', () => {
+        const jul = parseDate('04/Jul/24');
+        const dec = parseDate('25/Dec/24');
+        return jul instanceof Date && jul.getMonth() === 6 && 
+               dec instanceof Date && dec.getMonth() === 11;
+    });
+    
+    // Test 11: Data processing - missing CP dates
+    test('Data processing - missing CP dates', () => {
+        const mockData = {
+            tables: {
+                DEFAULT: [
+                    { team: 'Gamma', summary: 'Project C' } // No dates
+                ]
+            }
+        };
+        const result = processProjectData(mockData);
+        return result.length === 1 && result[0].cp3_date === null;
+    });
+    
+    // Test 12: Timeline with mixed valid/invalid dates
+    test('Timeline with mixed valid/invalid dates', () => {
+        const projects = [
+            { cp3_date: new Date(2024, 0, 15), cp4_date: null },
+            { cp3_date: null, cp4_date: new Date(2024, 1, 15) }
+        ];
+        const result = calculateTimelineLayout(projects);
+        return result.dateRange !== null;
+    });
+    
+    console.log(`\n📊 Test Results: ${passed} passed, ${failed} failed`);
+    
+    if (failed === 0) {
+        console.log('🎉 All tests passed!');
     } else {
-      console.error(`❌ Test ${testCount}: ${testName} - FAILED`);
+        console.log(`⚠️  ${failed} test(s) failed`);
     }
-  } catch (error) {
-    console.error(`💥 Test ${testCount}: ${testName} - ERROR:`, error.message);
-  }
+    
+    return { passed, failed };
 }
 
-// ===== DATE PARSING TESTS =====
-
-function testParseDateString() {
-  // Test valid date string
-  const date1 = parseDate('2024-01-15');
-  const date2 = parseDate('2024-02-01');
-  
-  console.log('🔍 Valid date test details:', { 
-    date1, 
-    date2,
-    date1Type: typeof date1,
-    date1instanceof: date1 instanceof Date,
-    date1Time: date1 ? date1.getTime() : 'null',
-    date1isNaN: date1 ? isNaN(date1.getTime()) : 'null',
-    actualYear: date1 ? date1.getFullYear() : 'null',
-    actualMonth: date1 ? date1.getMonth() : 'null', 
-    actualDate: date1 ? date1.getDate() : 'null',
-    expectedDate: 15
-  });
-  
-  // More flexible test - just check if it's a valid date in January 2024
-  const isValidDate = date1 instanceof Date && !isNaN(date1.getTime());
-  const isCorrectYear = date1.getFullYear() === 2024;
-  const isCorrectMonth = date1.getMonth() === 0; // January
-  const isCorrectDay = date1.getDate() === 15 || date1.getUTCDate() === 15; // Allow for timezone
-  
-  console.log('🔍 Test components:', { isValidDate, isCorrectYear, isCorrectMonth, isCorrectDay });
-  
-  return isValidDate && isCorrectYear && isCorrectMonth && isCorrectDay;
+// Auto-run tests when loaded
+if (typeof window !== 'undefined') {
+    runTests();
 }
-
-function testParseDateTimestamp() {
-  // Test timestamp (milliseconds)
-  const timestamp = 1705363200000; // 2024-01-15 in ms
-  const date = parseDate(timestamp);
-  
-  return date instanceof Date && 
-         !isNaN(date.getTime()) &&
-         date.getTime() === timestamp;
-}
-
-function testParseDateNull() {
-  // Test null/undefined handling
-  const date1 = parseDate(null);
-  const date2 = parseDate(undefined);
-  const date3 = parseDate('');
-  
-  return date1 === null && date2 === null && date3 === null;
-}
-
-function testParseDateInvalid() {
-  // Test invalid date strings
-  const date1 = parseDate('invalid-date');
-  const date2 = parseDate('2024-13-45'); // Invalid month/day
-  
-  // Both should return null or be invalid dates
-  const result1 = date1 === null || (date1 instanceof Date && isNaN(date1.getTime()));
-  const result2 = date2 === null || (date2 instanceof Date && isNaN(date2.getTime()));
-  
-  console.log('🔍 Invalid date test details:', { date1, date2, result1, result2 });
-  
-  return result1 && result2;
-}
-
-// ===== DATE FORMATTING TESTS =====
-
-function testFormatDateDisplay() {
-  // Test MM/DD/YY format
-  const date1 = new Date('2024-01-15'); // January 15, 2024
-  const date2 = new Date('2024-02-01'); // February 1, 2024
-  const date3 = new Date('2024-12-25'); // December 25, 2024
-  
-  const formatted1 = formatDateForDisplay(date1);
-  const formatted2 = formatDateForDisplay(date2);
-  const formatted3 = formatDateForDisplay(date3);
-  
-  console.log('🔍 Date formatting test:', {
-    input1: '2024-01-15',
-    output1: formatted1,
-    expected1: '01/15/24',
-    input2: '2024-02-01', 
-    output2: formatted2,
-    expected2: '02/01/24',
-    input3: '2024-12-25',
-    output3: formatted3,
-    expected3: '12/25/24'
-  });
-  
-  return formatted1 === '01/15/24' && 
-         formatted2 === '02/01/24' && 
-         formatted3 === '12/25/24';
-}
-
-// ===== DATA PROCESSING TESTS =====
-
-function testProcessProjectDataEmpty() {
-  // Test empty/null data
-  const result1 = processProjectData(null);
-  const result2 = processProjectData({});
-  const result3 = processProjectData({ tables: {} });
-  
-  return result1.projects.length === 0 && 
-         result1.teams.length === 0 &&
-         result2.projects.length === 0 &&
-         result3.projects.length === 0;
-}
-
-function testProcessProjectDataSample() {
-  // Test with sample data structure
-  const mockData = {
-    tables: {
-      DEFAULT: {
-        headers: [
-          { name: 'team' },
-          { name: 'summary' },
-          { name: 'cp3_date' },
-          { name: 'cp3_5_date' },
-          { name: 'cp4_date' },
-          { name: 'cp5_date' }
-        ],
-        rows: [
-          ['Platform', 'Auth Redesign', '2024-01-15', '2024-02-01', '2024-03-01', '2024-04-01'],
-          ['Mobile', 'iOS Performance', '2024-01-20', '2024-02-10', '2024-03-10', '2024-04-10']
-        ]
-      }
-    }
-  };
-  
-  const result = processProjectData(mockData);
-  
-  return result.projects.length === 2 &&
-         result.teams.length === 2 &&
-         result.teams.includes('Platform') &&
-         result.teams.includes('Mobile') &&
-         result.projects[0].summary === 'Auth Redesign' &&
-         result.projects[1].summary === 'iOS Performance' &&
-         result.dateRange !== null;
-}
-
-function testProcessProjectDataTeamGrouping() {
-  // Test team grouping logic
-  const mockData = {
-    tables: {
-      DEFAULT: {
-        headers: [
-          { name: 'team' },
-          { name: 'summary' },
-          { name: 'cp3_date' }
-        ],
-        rows: [
-          ['Platform', 'Project A', '2024-01-15'],
-          ['Platform', 'Project B', '2024-01-20'],
-          ['Mobile', 'Project C', '2024-01-25']
-        ]
-      }
-    }
-  };
-  
-  const result = processProjectData(mockData);
-  
-  return result.teamGroups['Platform'].length === 2 &&
-         result.teamGroups['Mobile'].length === 1 &&
-         result.teamGroups['Platform'][0].summary === 'Project A';
-}
-
-// ===== TIMELINE LAYOUT TESTS =====
-
-function testTimelineLayoutBasic() {
-  // Test basic timeline calculation
-  const mockProcessedData = {
-    dateRange: {
-      min: new Date('2024-01-01'),
-      max: new Date('2024-04-01') // 91 days
-    }
-  };
-  
-  const layout = calculateTimelineLayout(mockProcessedData, 800, 600);
-  
-  return layout.scale > 0 &&
-         layout.offsetX === 100 &&
-         layout.totalDays > 80 && layout.totalDays < 100 && // ~91 days
-         layout.timelineWidth === 600; // 800 - 200 margin
-}
-
-function testTimelineLayoutNoData() {
-  // Test with no date range
-  const mockProcessedData = { dateRange: null };
-  const layout = calculateTimelineLayout(mockProcessedData, 800, 600);
-  
-  return layout.scale === 1 &&
-         layout.offsetX === 50;
-}
-
-// ===== RUN ALL TESTS =====
-
-console.log('🧪 Running Date Parsing Tests...');
-runTest('Parse Date String', testParseDateString);
-runTest('Parse Date Timestamp', testParseDateTimestamp);
-runTest('Parse Date Null/Empty', testParseDateNull);
-runTest('Parse Date Invalid', testParseDateInvalid);
-
-console.log('\n📅 Running Date Formatting Tests...');
-runTest('Format Date MM/DD/YY', testFormatDateDisplay);
-
-console.log('\n📊 Running Data Processing Tests...');
-runTest('Process Empty Data', testProcessProjectDataEmpty);
-runTest('Process Sample Data', testProcessProjectDataSample);
-runTest('Team Grouping Logic', testProcessProjectDataTeamGrouping);
-
-console.log('\n📏 Running Timeline Layout Tests...');
-runTest('Basic Timeline Layout', testTimelineLayoutBasic);
-runTest('Timeline No Data', testTimelineLayoutNoData);
-
-// ===== RESULTS =====
-console.log(`\n🎯 TEST RESULTS: ${passedTests}/${testCount} tests passed`);
-
-if (passedTests === testCount) {
-  console.log('✅ ALL TESTS PASSED! Data processing and formatting is solid! 🚀');
-} else {
-  console.log(`⚠️  ${testCount - passedTests} tests failed - check implementation`);
-}
-
-console.log('\n💡 To run tests: Include test-cp-gantt.js after cp-gantt-simple.js in a test HTML file');
